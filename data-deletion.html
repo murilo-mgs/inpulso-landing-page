@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exclusão de Dados | InPulso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0d0221;
+            --color-purple: #7b2cbf;
+            --color-cyan: #00f5ff;
+            --color-text: #e0e0e0;
+            --color-text-muted: #a0a0b0;
+            --color-surface: rgba(123, 44, 191, 0.08);
+            --color-border: rgba(0, 245, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        nav {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--color-cyan);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: opacity 0.3s;
+        }
+
+        .back-link:hover { opacity: 0.7; }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--color-text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--color-cyan);
+            margin-top: 2.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            color: var(--color-text);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        a { color: var(--color-cyan); }
+
+        .section-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding: 1rem 1rem 1rem 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-cyan));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: white;
+            text-align: center;
+            line-height: 1.8rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.15), rgba(0, 245, 255, 0.08));
+            border: 1px solid var(--color-cyan);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .highlight-box a {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">InPulso</a>
+        <a href="/" class="back-link">&larr; Voltar ao site</a>
+    </nav>
+
+    <div class="container">
+        <h1>Exclusão de Dados</h1>
+        <p class="last-updated">Última atualização: 24 de março de 2026</p>
+
+        <p>A InPulso respeita seu direito à privacidade e ao controle dos seus dados pessoais. Você pode solicitar a exclusão de todos os dados que coletamos através do nosso aplicativo a qualquer momento.</p>
+
+        <h2>Como solicitar a exclusão dos seus dados</h2>
+
+        <ol class="steps">
+            <li>Envie um e-mail para <a href="mailto:contato@inpulso.online">contato@inpulso.online</a> com o assunto <strong>"Solicitação de Exclusão de Dados"</strong>.</li>
+            <li>No corpo do e-mail, inclua o nome completo e o endereço de e-mail associado à sua conta.</li>
+            <li>Você receberá uma confirmação de recebimento em até 2 dias úteis.</li>
+            <li>Seus dados serão excluídos permanentemente em até 30 dias após a confirmação.</li>
+            <li>Enviaremos uma confirmação final quando a exclusão for concluída.</li>
+        </ol>
+
+        <div class="highlight-box">
+            <p>Para solicitar a exclusão agora:</p>
+            <a href="mailto:contato@inpulso.online?subject=Solicitação de Exclusão de Dados&body=Olá, gostaria de solicitar a exclusão de todos os meus dados pessoais associados ao aplicativo InPulso.%0A%0ANome:%0AE-mail da conta:">Enviar solicitação por e-mail</a>
+        </div>
+
+        <h2>O que será excluído</h2>
+        <div class="section-card">
+            <p>Ao solicitar a exclusão, removeremos permanentemente:</p>
+            <ul style="margin: 0.5rem 0 0 1.5rem;">
+                <li>Suas informações de perfil e conta.</li>
+                <li>Dados de acesso e tokens de autenticação.</li>
+                <li>Histórico de uso e logs de atividade.</li>
+                <li>Relatórios e análises gerados.</li>
+                <li>Quaisquer dados obtidos através das APIs da Meta em seu nome.</li>
+            </ul>
+        </div>
+
+        <h2>Revogando acesso pelo Facebook</h2>
+        <p>Além de solicitar a exclusão diretamente conosco, você também pode revogar o acesso do nosso aplicativo através das suas configurações do Facebook:</p>
+        <div class="section-card">
+            <p>Acesse <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank">Configurações do Facebook → Integrações comerciais</a> e remova o acesso do app "InPulso Analytics".</p>
+        </div>
+
+        <h2>Contato</h2>
+        <div class="section-card">
+            <p>Para dúvidas sobre exclusão de dados:</p>
+            <p><strong>InPulso</strong><br>
+            E-mail: <a href="mailto:contato@inpulso.online">contato@inpulso.online</a><br>
+            Site: <a href="https://inpulso.online">https://inpulso.online</a></p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 InPulso. Todos os direitos reservados.
+    </footer>
+</body>
+</html>
