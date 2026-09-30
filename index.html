@@ -118,11 +118,44 @@
         /* ---------- HERO ---------- */
         .hero {
             padding: 190px 0 110px;
-            background:
-              radial-gradient(120% 80% at 85% 0%, rgba(168,194,188,0.55) 0%, rgba(168,194,188,0) 55%),
-              linear-gradient(180deg, var(--paper) 0%, var(--cream) 100%);
-            position: relative;
+            min-height: 100svh; display: flex; align-items: center;
+            background: var(--navy);
+            position: relative; overflow: hidden; color: #F5F1EB;
         }
+        /* filme de fundo (Dogma) */
+        .hero .bg-film, .film-band .bg-film {
+            position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
+        }
+        .hero::before {
+            content: ""; position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(90deg, rgba(15,42,71,0.92) 0%, rgba(15,42,71,0.78) 50%, rgba(15,42,71,0.3) 100%);
+        }
+        .hero .wrap, .hero .plus { position: relative; z-index: 2; }
+        .hero .plus { color: var(--sage); }
+        .hero .eyebrow { color: var(--sage); }
+        .hero-eyebrow::before { background: var(--sage); }
+        .hero h1 { color: #F5F1EB; }
+        .hero h1 .grow::after { background: var(--sage); }
+        .hero-sub { color: rgba(245,241,235,0.8); }
+        .hero .btn-primary { background: #F5F1EB; color: var(--navy); }
+        .hero .btn-primary:hover { background: #fff; }
+        .hero .btn-ghost { color: #F5F1EB; border-bottom-color: rgba(245,241,235,0.6); }
+        .hero-cred { color: rgba(245,241,235,0.7); border-top-color: rgba(245,241,235,0.2); }
+        .hero-cred span::after { color: var(--sage); }
+        /* 2º filme (Fu Wax): faixa em tela cheia logo abaixo do hero */
+        .film-band {
+            position: relative; overflow: hidden; min-height: 92svh; display: flex; align-items: flex-end;
+            background: var(--navy); color: #F5F1EB;
+        }
+        .film-band::before {
+            content: ""; position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(15,42,71,0) 40%, rgba(15,42,71,0.78) 100%);
+        }
+        .film-band .wrap { position: relative; z-index: 2; padding-bottom: 72px; padding-top: 72px; }
+        .film-band .eyebrow { color: var(--sage); }
+        .film-band h2 { font-size: clamp(1.9rem, 4vw, 3rem); max-width: 20ch; margin-top: 14px; color: #F5F1EB; }
+        .film-band p { margin-top: 14px; max-width: 46ch; color: rgba(245,241,235,0.8); font-size: 1.05rem; }
+        @media (prefers-reduced-motion: reduce) { .hero .bg-film, .film-band .bg-film { display: none; } }
         .hero .plus { position: absolute; font-family: var(--serif); color: var(--sage-deep); opacity: .5; font-size: 2rem; }
         .hero .plus.a { top: 150px; right: 12%; }
         .hero .plus.b { bottom: 90px; left: 7%; font-size: 1.4rem; }
@@ -219,14 +252,6 @@
         .case-video { border-radius: 4px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(15,42,71,0.12); background: var(--navy); }
         .case-video video { width: 100%; display: block; }
 
-        /* films (Dogma / Fu Wax) */
-        .films { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 56px; }
-        .film { border-radius: 4px; overflow: hidden; border: 1px solid var(--line); background: var(--navy); box-shadow: 0 24px 60px rgba(15,42,71,0.12); position: relative; }
-        .film video { width: 100%; aspect-ratio: 16 / 9; display: block; object-fit: cover; }
-        .film-cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 24px; color: #F5F1EB; background: linear-gradient(to top, rgba(15,42,71,0.82), rgba(15,42,71,0)); }
-        .film-cap .eyebrow { color: #E8DCC8; opacity: .85; }
-        .film-cap p { font-family: var(--serif); font-size: 1.15rem; line-height: 1.3; margin-top: 6px; }
-        @media (max-width: 880px) { .films { grid-template-columns: 1fr; } }
         .case-quote { margin-top: 26px; font-family: var(--serif); font-style: italic; font-size: 1.02rem; color: var(--navy); border-left: 2px solid var(--sage-deep); padding-left: 18px; line-height: 1.5; }
         .case-quote cite { display: block; margin-top: 10px; font-style: normal; font-family: var(--sans); font-size: 0.82rem; color: var(--text-dim); }
 
@@ -379,6 +404,9 @@
 
     <!-- HERO -->
     <header class="hero" id="top">
+        <video class="bg-film" autoplay loop muted playsinline preload="auto" poster="film-dogma-poster.jpg" aria-hidden="true">
+            <source src="film-dogma.mp4" type="video/mp4">
+        </video>
         <span class="plus a">+</span>
         <span class="plus b">+</span>
         <div class="wrap">
@@ -401,6 +429,17 @@
         </div>
     </header>
 
+    <!-- FILME 2 · Fu Wax -->
+    <section class="film-band" aria-label="Fu Wax nos EUA">
+        <video class="bg-film" autoplay loop muted playsinline preload="metadata" poster="film-fuwax-poster.jpg" aria-hidden="true">
+            <source src="film-fuwax.mp4" type="video/mp4">
+        </video>
+        <div class="wrap reveal">
+            <span class="eyebrow">Fu Wax · Califórnia</span>
+            <h2>Made in Brazil. 14,7x de retorno real nos EUA.</h2>
+            <p>Depois de cortar os 68% de receita fantasma que o painel reportava. A gente roda o que vende.</p>
+        </div>
+    </section>
 
     <!-- MARCAS / esteira -->
     <section class="clients">
@@ -531,26 +570,6 @@
             <div class="proof-head reveal">
                 <span class="eyebrow">Prova</span>
                 <h2>A gente roda o que vende.</h2>
-            </div>
-            <div class="films reveal">
-                <figure class="film">
-                    <video autoplay loop muted playsinline preload="metadata" poster="film-dogma-poster.jpg">
-                        <source src="film-dogma.mp4" type="video/mp4">
-                    </video>
-                    <figcaption class="film-cap">
-                        <span class="eyebrow">Dogma Cervejaria · São Paulo</span>
-                        <p>Loja do zero. Clube dentro de casa. Sete dígitos por ano.</p>
-                    </figcaption>
-                </figure>
-                <figure class="film">
-                    <video autoplay loop muted playsinline preload="metadata" poster="film-fuwax-poster.jpg">
-                        <source src="film-fuwax.mp4" type="video/mp4">
-                    </video>
-                    <figcaption class="film-cap">
-                        <span class="eyebrow">Fu Wax · Califórnia</span>
-                        <p>Made in Brazil. 14,7x de retorno real nos EUA.</p>
-                    </figcaption>
-                </figure>
             </div>
             <div class="stat-strip reveal">
                 <div class="stat">
