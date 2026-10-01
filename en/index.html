@@ -117,18 +117,37 @@
 
         /* ---------- HERO ---------- */
         .hero {
-            padding: 190px 0 110px;
-            min-height: 100svh; display: flex; align-items: center;
+            padding: 0; height: 380svh; display: block;
             background: var(--navy);
-            position: relative; overflow: hidden; color: #F5F1EB;
+            position: relative; color: #F5F1EB;
         }
+        .hero .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; padding: 120px 0 60px; }
+        .hero .stage::before {
+            content: ""; position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(90deg, rgba(15,42,71,0.84) 0%, rgba(15,42,71,0.6) 40%, rgba(15,42,71,0.05) 100%);
+        }
+        .hero .stage .bg-film { transform: translateX(16%) scale(1.22); transform-origin: center; }
+        .hero .scrub-canvas { opacity: 0; transition: opacity .35s ease; }
+        .hero.canvas-ready .scrub-canvas { opacity: 1; }
+        .hero.canvas-ready .scrub-film { visibility: hidden; }
+        @media (max-width: 880px) {
+            .hero .stage { padding: 96px 0 40px; align-items: flex-start; }
+            .hero .stage .bg-film { transform: translateX(10%) scale(1.35); transform-origin: center 60%; }
+            .hero .stage::before { background: linear-gradient(180deg, rgba(15,42,71,0.9) 0%, rgba(15,42,71,0.72) 55%, rgba(15,42,71,0.35) 100%); }
+            .hero .stage h1 { font-size: 2.5rem; margin-bottom: 18px; }
+            .hero .stage .hero-sub { font-size: 0.98rem; margin-bottom: 22px; }
+            .hero .stage .hero-cred { display: none; }
+        }
+        .hero .beat { display: inline-block; opacity: .12; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+        .hero .beat.on { opacity: 1; transform: none; }
+        .hero .beat-block { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+        .hero .beat-block.on { opacity: 1; transform: none; }
+        .hero .scroll-hint { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 2; font-family: var(--sans); font-size: 0.7rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(245,241,235,.6); transition: opacity .4s; }
+        .hero .scroll-hint.off { opacity: 0; }
+        @media (prefers-reduced-motion: reduce) { .hero { height: auto; } .hero .stage { position: relative; height: auto; min-height: 100svh; } .hero .beat, .hero .beat-block { opacity: 1; transform: none; } .hero .scroll-hint { display: none; } }
         /* background film (Dogma) */
         .hero .bg-film, .film-band .bg-film {
             position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
-        }
-        .hero::before {
-            content: ""; position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(90deg, rgba(15,42,71,0.92) 0%, rgba(15,42,71,0.78) 50%, rgba(15,42,71,0.3) 100%);
         }
         .hero .wrap, .hero .plus { position: relative; z-index: 2; }
         .hero .plus { color: var(--sage); }
@@ -377,7 +396,7 @@
             .case-video { order: -1; }
             .op-grid { gap: 1px; }
             .footer-grid { gap: 32px; }
-            .hero { padding: 150px 0 80px; }
+            .hero { padding: 0; }
         }
         @media (max-width: 520px) {
             .wrap { padding: 0 22px; }
@@ -405,14 +424,17 @@
 
     <!-- HERO -->
     <header class="hero" id="top">
-        <video class="bg-film" autoplay loop muted playsinline preload="auto" poster="../film-dogma-poster.jpg" aria-hidden="true">
-            <source src="../film-dogma.mp4" type="video/mp4">
+      <div class="stage">
+        <canvas class="bg-film scrub-canvas" aria-hidden="true"></canvas>
+        <video class="bg-film scrub-film" muted playsinline preload="none" poster="../scrub-dogma-poster.jpg" aria-hidden="true">
+            <source src="../scrub-dogma.mp4" type="video/mp4">
         </video>
         <span class="plus a">+</span>
         <span class="plus b">+</span>
         <div class="wrap">
-            <div class="hero-eyebrow"><span class="eyebrow">An AI-run growth operation</span></div>
-            <h1>AI optimizes.<br>Optimizing isn't<br><span class="grow">growing.</span></h1>
+            <div class="hero-eyebrow beat on" data-at="0"><span class="eyebrow">An AI-run growth operation</span></div>
+            <h1><span class="beat on" data-at="0">AI optimizes.</span><br><span class="beat" data-at="0.42">Optimizing isn't</span><br><span class="beat grow" data-at="0.66">growing.</span></h1>
+            <div class="beat-block" data-at="0.84">
             <p class="hero-sub">
                 For e-commerce brands that already spend on ads and have stopped growing.
                 We install the growth operation AI runs inside your business, every day:
@@ -427,7 +449,10 @@
                 <span>15 years in online marketing</span>
                 <span>e-commerce + media + AI</span>
             </div>
+            </div>
         </div>
+        <div class="scroll-hint">Scroll to pour ↓</div>
+      </div>
     </header>
 
     <!-- FILM 2 · Fu Wax -->
@@ -698,5 +723,67 @@
         }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+<script>
+(function () {
+  var hero = document.querySelector('.hero'); if (!hero) return;
+  var v = hero.querySelector('.scrub-film'), cv = hero.querySelector('.scrub-canvas');
+  var beats = Array.prototype.slice.call(hero.querySelectorAll('.beat, .beat-block'));
+  var hint = hero.querySelector('.scroll-hint');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    beats.forEach(function (b) { b.classList.add('on'); });
+    if (v) { v.preload = 'auto'; v.loop = true; v.autoplay = true; v.load(); v.play().catch(function(){}); }
+    return;
+  }
+  // Sequência de frames (Apple-style): scroll troca de imagem no canvas, sem decodificar vídeo.
+  var N = 169, small = Math.min(window.innerWidth, window.innerHeight * 16 / 9) < 900;
+  var dir = small ? '../frames/m/' : '../frames/d/';
+  var frames = new Array(N), loaded = 0, ctx = cv.getContext('2d');
+  var target = 0, current = 0, drawn = -1, raf = 0;
+  function pad(n) { return ('00' + n).slice(-3); }
+  function size() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(cv.clientWidth * dpr); cv.height = Math.round(cv.clientHeight * dpr); drawn = -1;
+  }
+  function draw(i) {
+    var img = frames[i];
+    if (!img || !img.complete || !img.naturalWidth) { for (var k = 1; k < N; k++) { var a = frames[i - k], b = frames[i + k]; if (a && a.naturalWidth) { img = a; break; } if (b && b.naturalWidth) { img = b; break; } } }
+    if (!img || !img.naturalWidth) return;
+    var cw = cv.width, ch = cv.height, iw = img.naturalWidth, ih = img.naturalHeight;
+    var s = Math.max(cw / iw, ch / ih), w = iw * s, h = ih * s;
+    ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h); drawn = i;
+  }
+  function progress() {
+    var total = hero.offsetHeight - window.innerHeight; if (total <= 0) return 0;
+    return Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / total));
+  }
+  function loop() {
+    raf = 0;
+    current += (target - current) * 0.18;           // suavização: o frame "persegue" o scroll
+    if (Math.abs(target - current) < 0.02) current = target;
+    var i = Math.round(current);
+    if (i !== drawn) draw(i);
+    if (current !== target) raf = requestAnimationFrame(loop);
+  }
+  function onScroll() {
+    var p = progress();
+    target = p * (N - 1);
+    for (var j = 0; j < beats.length; j++) beats[j].classList.toggle('on', p >= parseFloat(beats[j].getAttribute('data-at') || '0'));
+    if (hint) hint.classList.toggle('off', p > 0.06);
+    if (!raf) raf = requestAnimationFrame(loop);
+  }
+  function load(i, cb) {
+    var img = new Image(); img.decoding = 'async'; img.src = dir + pad(i + 1) + '.webp';
+    img.onload = img.onerror = function () { loaded++; cb && cb(); };
+    frames[i] = img;
+  }
+  // 1º frame já desenha; depois carrega em ordem de "grade" (1 a cada 8, 4, 2, 1) pra ter cobertura cedo.
+  load(0, function () {
+    size(); draw(0); hero.classList.add('canvas-ready'); onScroll();
+    [8, 4, 2, 1].forEach(function (step) { for (var i = step; i < N; i += step) if (!frames[i]) load(i, function () { if (Math.round(current) !== drawn) draw(Math.round(current)); }); });
+  });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () { size(); draw(Math.round(current)); onScroll(); });
+})();
+</script>
 </body>
 </html>
