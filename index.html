@@ -117,18 +117,34 @@
 
         /* ---------- HERO ---------- */
         .hero {
-            padding: 190px 0 110px;
-            min-height: 100svh; display: flex; align-items: center;
+            padding: 0; height: 300svh; display: block;
             background: var(--navy);
-            position: relative; overflow: hidden; color: #F5F1EB;
+            position: relative; color: #F5F1EB;
         }
+        .hero .stage { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; align-items: center; padding: 120px 0 60px; }
+        .hero .stage::before {
+            content: ""; position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(90deg, rgba(15,42,71,0.84) 0%, rgba(15,42,71,0.6) 40%, rgba(15,42,71,0.05) 100%);
+        }
+        .hero .stage .bg-film { transform: translateX(16%) scale(1.22); transform-origin: center; }
+        @media (max-width: 880px) {
+            .hero .stage { padding: 96px 0 40px; align-items: flex-start; }
+            .hero .stage .bg-film { transform: translateX(10%) scale(1.35); transform-origin: center 60%; }
+            .hero .stage::before { background: linear-gradient(180deg, rgba(15,42,71,0.9) 0%, rgba(15,42,71,0.72) 55%, rgba(15,42,71,0.35) 100%); }
+            .hero .stage h1 { font-size: 2.5rem; margin-bottom: 18px; }
+            .hero .stage .hero-sub { font-size: 0.98rem; margin-bottom: 22px; }
+            .hero .stage .hero-cred { display: none; }
+        }
+        .hero .beat { display: inline-block; opacity: .12; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+        .hero .beat.on { opacity: 1; transform: none; }
+        .hero .beat-block { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s ease; }
+        .hero .beat-block.on { opacity: 1; transform: none; }
+        .hero .scroll-hint { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 2; font-family: var(--sans); font-size: 0.7rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(245,241,235,.6); transition: opacity .4s; }
+        .hero .scroll-hint.off { opacity: 0; }
+        @media (prefers-reduced-motion: reduce) { .hero { height: auto; } .hero .stage { position: relative; height: auto; min-height: 100svh; } .hero .beat, .hero .beat-block { opacity: 1; transform: none; } .hero .scroll-hint { display: none; } }
         /* filme de fundo (Dogma) */
         .hero .bg-film, .film-band .bg-film {
             position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
-        }
-        .hero::before {
-            content: ""; position: absolute; inset: 0; z-index: 1;
-            background: linear-gradient(90deg, rgba(15,42,71,0.92) 0%, rgba(15,42,71,0.78) 50%, rgba(15,42,71,0.3) 100%);
         }
         .hero .wrap, .hero .plus { position: relative; z-index: 2; }
         .hero .plus { color: var(--sage); }
@@ -376,7 +392,7 @@
             .case-video { order: -1; }
             .op-grid { gap: 1px; }
             .footer-grid { gap: 32px; }
-            .hero { padding: 150px 0 80px; }
+            .hero { padding: 0; }
         }
         @media (max-width: 520px) {
             .wrap { padding: 0 22px; }
@@ -404,14 +420,16 @@
 
     <!-- HERO -->
     <header class="hero" id="top">
-        <video class="bg-film" autoplay loop muted playsinline preload="auto" poster="film-dogma-poster.jpg" aria-hidden="true">
-            <source src="film-dogma.mp4" type="video/mp4">
+      <div class="stage">
+        <video class="bg-film scrub-film" muted playsinline preload="auto" poster="scrub-dogma-poster.jpg" aria-hidden="true">
+            <source src="scrub-dogma.mp4" type="video/mp4">
         </video>
         <span class="plus a">+</span>
         <span class="plus b">+</span>
         <div class="wrap">
-            <div class="hero-eyebrow"><span class="eyebrow">Operação de growth rodada por IA</span></div>
-            <h1>A IA otimiza.<br>Otimizar não é<br><span class="grow">crescer.</span></h1>
+            <div class="hero-eyebrow beat on" data-at="0"><span class="eyebrow">Operação de growth rodada por IA</span></div>
+            <h1><span class="beat on" data-at="0">A IA otimiza.</span><br><span class="beat" data-at="0.3">Otimizar não é</span><br><span class="beat grow" data-at="0.58">crescer.</span></h1>
+            <div class="beat-block" data-at="0.78">
             <p class="hero-sub">
                 Para e-commerces que já investem em mídia e pararam de crescer.
                 Instalamos no seu negócio a operação de growth que a IA roda todo dia:
@@ -426,7 +444,10 @@
                 <span>15 anos de experiência em marketing online</span>
                 <span>e-commerce + mídia + IA</span>
             </div>
+            </div>
         </div>
+        <div class="scroll-hint">Role pra ver ↓</div>
+      </div>
     </header>
 
     <!-- FILME 2 · Fu Wax -->
@@ -697,5 +718,27 @@
         }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+<script>
+(function () {
+  var hero = document.querySelector('.hero'), v = hero && hero.querySelector('.scrub-film');
+  if (!v || window.matchMedia('(prefers-reduced-motion: reduce)').matches) { if (v) { v.autoplay = true; v.loop = true; v.play().catch(function(){}); } return; }
+  var beats = Array.prototype.slice.call(hero.querySelectorAll('.beat, .beat-block'));
+  var hint = hero.querySelector('.scroll-hint');
+  var dur = 0, ticking = false, last = -1;
+  v.addEventListener('loadedmetadata', function () { dur = v.duration; update(); });
+  v.load();
+  function update() {
+    ticking = false;
+    var total = hero.offsetHeight - window.innerHeight; if (total <= 0) return;
+    var p = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / total));
+    if (dur) { var t = p * (dur - 0.06); if (Math.abs(t - last) > 0.015) { last = t; try { v.currentTime = t; } catch (e) {} } }
+    for (var i = 0; i < beats.length; i++) beats[i].classList.toggle('on', p >= parseFloat(beats[i].getAttribute('data-at') || '0'));
+    if (hint) hint.classList.toggle('off', p > 0.08);
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; window.requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 </body>
 </html>
