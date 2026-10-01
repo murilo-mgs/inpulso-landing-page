@@ -725,8 +725,15 @@
   var beats = Array.prototype.slice.call(hero.querySelectorAll('.beat, .beat-block'));
   var hint = hero.querySelector('.scroll-hint');
   var dur = 0, ticking = false, last = -1;
-  v.addEventListener('loadedmetadata', function () { dur = v.duration; update(); });
-  v.load();
+  v.addEventListener('loadedmetadata', function () { dur = v.duration; last = -1; update(); });
+  // Baixa o vídeo inteiro pra memória: o scroll pula pra qualquer frame sem esperar buffer.
+  var srcEl = v.querySelector('source'), url = srcEl ? srcEl.getAttribute('src') : v.getAttribute('src');
+  if (url && window.fetch && window.URL && URL.createObjectURL) {
+    fetch(url).then(function (r) { return r.ok ? r.blob() : Promise.reject(); }).then(function (blob) {
+      v.removeAttribute('src'); if (srcEl) srcEl.remove();
+      v.src = URL.createObjectURL(blob); v.load();
+    }).catch(function () { v.load(); });
+  } else { v.load(); }
   function update() {
     ticking = false;
     var total = hero.offsetHeight - window.innerHeight; if (total <= 0) return;
