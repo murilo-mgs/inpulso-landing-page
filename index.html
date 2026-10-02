@@ -2,6 +2,25 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ0GKMYR51"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FQ0GKMYR51');
+      // Clique em WhatsApp = conversão do site (generate_lead)
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]') : null;
+        if (!a) return;
+        gtag('event', 'generate_lead', {
+          method: 'whatsapp',
+          link_text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
+          link_url: a.href,
+          page_path: location.pathname
+        });
+      });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InPulso · Operação de Growth rodada por IA</title>
     <meta name="description" content="A IA otimiza. Otimizar não é crescer. A InPulso instala a operação de growth que roda no seu e-commerce e volta a trazer cliente novo — não só o mesmo comprando de novo. Raio-X de Crescimento Real por nossa conta.">

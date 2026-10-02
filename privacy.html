@@ -2,6 +2,25 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ0GKMYR51"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FQ0GKMYR51');
+      // Clique em WhatsApp = conversão do site (generate_lead)
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]') : null;
+        if (!a) return;
+        gtag('event', 'generate_lead', {
+          method: 'whatsapp',
+          link_text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
+          link_url: a.href,
+          page_path: location.pathname
+        });
+      });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidade | InPulso</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -130,7 +149,7 @@
 
     <div class="container">
         <h1>Política de Privacidade</h1>
-        <p class="last-updated">Última atualização: 24 de março de 2026</p>
+        <p class="last-updated">Última atualização: 2 de outubro de 2026</p>
 
         <p>A InPulso ("nós", "nosso" ou "Empresa") respeita a privacidade de todos os usuários dos nossos serviços. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações quando você utiliza nosso aplicativo, site e serviços relacionados.</p>
 
@@ -189,13 +208,17 @@
         <p>Nosso aplicativo acessa dados das plataformas Meta através de APIs oficiais. Os dados obtidos por essas APIs são utilizados exclusivamente para fornecer os serviços contratados por você. Seguimos rigorosamente as políticas de dados da plataforma Meta, incluindo os requisitos de uso, armazenamento e exclusão de dados.</p>
         <p>Você pode revogar o acesso do nosso aplicativo a qualquer momento através das <a href="https://www.facebook.com/settings?tab=business_tools" target="_blank">configurações do Facebook</a>.</p>
 
-        <h2>8. Exclusão de Dados</h2>
+        <h2>8. Cookies e Análise de Navegação</h2>
+        <p>Nosso site utiliza o Google Analytics 4, serviço do Google LLC, para entender como os visitantes chegam e navegam pelas páginas (páginas vistas, origem da visita, cliques em botões de contato). Para isso, o Google Analytics usa cookies e identificadores que não revelam sua identidade. O endereço IP é tratado de forma anonimizada pelo próprio serviço.</p>
+        <p>Usamos esses dados apenas de forma agregada, para melhorar o site e medir o resultado das nossas campanhas. Você pode impedir a coleta instalando a <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">extensão de desativação do Google Analytics</a> ou bloqueando cookies no seu navegador. Mais detalhes em <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidade do Google</a>.</p>
+
+        <h2>9. Exclusão de Dados</h2>
         <p>Para solicitar a exclusão dos seus dados, acesse nossa <a href="/data-deletion.html">página de exclusão de dados</a> ou envie um e-mail para o endereço abaixo. Processaremos sua solicitação em até 30 dias.</p>
 
-        <h2>9. Alterações nesta Política</h2>
+        <h2>10. Alterações nesta Política</h2>
         <p>Podemos atualizar esta Política de Privacidade periodicamente. Notificaremos sobre mudanças significativas por e-mail ou aviso no serviço. Recomendamos revisar esta página regularmente.</p>
 
-        <h2>10. Contato</h2>
+        <h2>11. Contato</h2>
         <div class="section-card">
             <p>Para dúvidas sobre esta Política de Privacidade ou sobre o tratamento dos seus dados:</p>
             <p><strong>InPulso</strong><br>
