@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ0GKMYR51"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQG4Y6B551"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-FQ0GKMYR51');
-      // Clique em WhatsApp = conversão do site (generate_lead)
+      gtag('config', 'G-NQG4Y6B551');
+      // Clique em WhatsApp = conversão do site (GA4 generate_lead + Meta Contact)
       document.addEventListener('click', function (e) {
         var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]') : null;
         if (!a) return;
+        if (window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp' });
         gtag('event', 'generate_lead', {
           method: 'whatsapp',
           link_text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
@@ -21,6 +22,17 @@
         });
       });
     </script>
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '592464496679667');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=592464496679667&ev=PageView&noscript=1"></noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InPulso · Operação de Growth rodada por IA</title>
     <meta name="description" content="A IA otimiza. Otimizar não é crescer. A InPulso instala a operação de growth que roda no seu e-commerce e volta a trazer cliente novo — não só o mesmo comprando de novo. Raio-X de Crescimento Real por nossa conta.">

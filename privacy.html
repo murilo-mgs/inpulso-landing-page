@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FQ0GKMYR51"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQG4Y6B551"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-FQ0GKMYR51');
-      // Clique em WhatsApp = conversão do site (generate_lead)
+      gtag('config', 'G-NQG4Y6B551');
+      // Clique em WhatsApp = conversão do site (GA4 generate_lead + Meta Contact)
       document.addEventListener('click', function (e) {
         var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]') : null;
         if (!a) return;
+        if (window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp' });
         gtag('event', 'generate_lead', {
           method: 'whatsapp',
           link_text: (a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80),
@@ -21,6 +22,17 @@
         });
       });
     </script>
+    <!-- Meta Pixel -->
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '592464496679667');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=592464496679667&ev=PageView&noscript=1"></noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidade | InPulso</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -149,7 +161,7 @@
 
     <div class="container">
         <h1>Política de Privacidade</h1>
-        <p class="last-updated">Última atualização: 2 de outubro de 2026</p>
+        <p class="last-updated">Última atualização: 3 de outubro de 2026</p>
 
         <p>A InPulso ("nós", "nosso" ou "Empresa") respeita a privacidade de todos os usuários dos nossos serviços. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos suas informações quando você utiliza nosso aplicativo, site e serviços relacionados.</p>
 
@@ -211,6 +223,7 @@
         <h2>8. Cookies e Análise de Navegação</h2>
         <p>Nosso site utiliza o Google Analytics 4, serviço do Google LLC, para entender como os visitantes chegam e navegam pelas páginas (páginas vistas, origem da visita, cliques em botões de contato). Para isso, o Google Analytics usa cookies e identificadores que não revelam sua identidade. O endereço IP é tratado de forma anonimizada pelo próprio serviço.</p>
         <p>Usamos esses dados apenas de forma agregada, para melhorar o site e medir o resultado das nossas campanhas. Você pode impedir a coleta instalando a <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">extensão de desativação do Google Analytics</a> ou bloqueando cookies no seu navegador. Mais detalhes em <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidade do Google</a>.</p>
+        <p>Também utilizamos o Pixel da Meta (Meta Platforms, Inc.), que registra visitas e cliques em botões de contato para medir o resultado dos nossos anúncios no Facebook e no Instagram e para exibir anúncios a quem já visitou o site. Você pode controlar esse uso nas <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener">preferências de anúncios da Meta</a> ou bloqueando cookies no seu navegador.</p>
 
         <h2>9. Exclusão de Dados</h2>
         <p>Para solicitar a exclusão dos seus dados, acesse nossa <a href="/data-deletion.html">página de exclusão de dados</a> ou envie um e-mail para o endereço abaixo. Processaremos sua solicitação em até 30 dias.</p>
