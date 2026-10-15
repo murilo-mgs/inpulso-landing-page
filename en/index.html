@@ -239,6 +239,18 @@
         .hero-cred span { display: inline-flex; gap: 14px; }
         .hero-cred span::after { content: "·"; color: var(--sage-deep); }
         .hero-cred span:last-child::after { content: ""; }
+        /* hero cabe na altura da tela (notebook): fonte acompanha a altura e o bloco nunca estoura pra cima */
+        @media (min-width: 881px) {
+            .hero .stage { align-items: flex-start; padding: 100px 0 24px; }
+            .hero .stage > .wrap { margin-top: auto; margin-bottom: auto; }
+            .hero h1 { font-size: clamp(2.4rem, min(6.4vw, 7.2svh), 5.2rem); max-width: 17ch; margin-bottom: clamp(16px, 3svh, 30px); }
+            .hero-eyebrow { margin-bottom: clamp(12px, 2.4svh, 28px); }
+            .hero-sub { margin-bottom: clamp(18px, 3.4svh, 40px); }
+        }
+        @media (min-width: 881px) and (max-height: 880px) {
+            .hero .stage .hero-cred { display: none; }
+            .hero-sub { font-size: 1.05rem; }
+        }
 
         /* ---------- THESIS ---------- */
         .thesis { padding: 110px 0; background: var(--paper); }
