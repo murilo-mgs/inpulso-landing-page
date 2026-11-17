@@ -28,7 +28,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="index, follow">
 <title>Imersão Natal e 2027 com IA · InPulso</title>
-<link rel="canonical" href="https://www.inpulso.online/imersao/">
+<link rel="canonical" href="https://imersao.inpulso.online/">
 <meta name="description" content="A Black não foi tudo isso? 4 horas ao vivo no sábado, 5/12: você lê o que a Black ensinou, prepara a loja pro Natal com IA e sai com o plano de 2027.">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,13 +114,20 @@ section{padding:96px 0}
 
 /* quem */
 .who{background:var(--navy-2);color:var(--paper)}
-.who .wrap{max-width:900px}
 .who .eyebrow{color:var(--sage)}
-.who blockquote{font-family:var(--serif);font-size:clamp(1.4rem,3.2vw,2.2rem);line-height:1.32;margin:24px 0 28px}
-.who blockquote em{color:var(--sage)}
-.who .sign{display:flex;gap:14px;align-items:center}
-.who .rule{width:40px;height:1px;background:var(--sage)}
-.who small{color:rgba(245,241,235,.6)}
+.who-grid{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:64px;align-items:center}
+.who-photo{position:relative;margin:0}
+.who-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:6px;border:1px solid rgba(255,255,255,.22);box-shadow:14px 14px 0 var(--sage-deep)}
+.who-photo figcaption{position:absolute;left:-14px;bottom:26px;background:var(--paper);color:var(--navy);border:1.5px solid var(--navy);border-radius:999px;padding:9px 16px;font-size:.84rem;font-weight:600;box-shadow:5px 5px 0 var(--sage-deep);white-space:nowrap}
+.who h2{font-size:clamp(2rem,4.2vw,3rem);margin:14px 0 18px;color:var(--paper)}
+.who h2 em{color:var(--sage)}
+.who .bio{font-size:1.08rem;color:rgba(245,241,235,.82);max-width:56ch}
+.tl{list-style:none;margin:30px 0 0;border-top:1px solid rgba(255,255,255,.16)}
+.tl li{display:grid;grid-template-columns:108px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.16);align-items:baseline}
+.tl .y{font-family:var(--serif);font-style:italic;color:var(--sage);font-size:1.05rem;white-space:nowrap}
+.tl b{display:block;font-family:var(--serif);font-weight:500;font-size:1.18rem;color:var(--paper);line-height:1.25}
+.tl span{display:block;color:rgba(245,241,235,.7);font-size:.95rem;margin-top:3px}
+.who blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.4;margin-top:28px;padding-left:18px;border-left:2px solid var(--sage);color:var(--paper)}
 .brands{margin-top:36px;color:rgba(245,241,235,.65);font-size:.95rem}
 
 /* oferta */
@@ -167,6 +174,10 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
   .wrap{padding:0 20px} nav{padding:14px 20px}
   .hero{padding:56px 0 64px}
   .hero .grid,.fit,.take{grid-template-columns:1fr}
+  .who-grid{grid-template-columns:1fr;gap:40px}
+  .who-photo{max-width:340px}
+  .who-photo figcaption{left:-8px}
+  .tl li{grid-template-columns:92px 1fr;gap:14px}
   .take{grid-template-columns:1fr 1fr}
   .block{grid-template-columns:1fr;gap:12px;padding:22px}
   section{padding:72px 0}
@@ -293,10 +304,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 </section>
 
 <section class="who">
-  <div class="wrap reveal">
-    <span class="eyebrow">Quem conduz</span>
-    <blockquote>Comecei em 2011 cuidando dos anúncios da Dafiti. Hoje a InPulso opera a loja, os anúncios e a base de clientes de marcas brasileiras todo dia, <em>com agentes de IA no braçal e gente no leme.</em></blockquote>
-    <div class="sign"><span class="rule"></span><div><b>Murilo Galante</b><br><small>Fundador · InPulso · 15 anos de e-commerce</small></div></div>  </div>
+  <div class="wrap who-grid reveal">
+    <figure class="who-photo">
+      <img src="murilo.webp" alt="Murilo Galante, fundador da InPulso" width="800" height="1000" loading="lazy">
+      <figcaption>Fundador · InPulso</figcaption>
+    </figure>
+    <div>
+      <span class="eyebrow">Quem conduz</span>
+      <h2>Murilo Galante. <em>15 anos vendo loja online por dentro.</em></h2>
+      <p class="bio">Passei por operação grande, toquei a minha própria loja e hoje opero a de outras marcas. A imersão é essa rotina aberta, com IA fazendo o braçal.</p>
+      <ul class="tl">
+        <li><span class="y">2011</span><div><b>Dafiti</b><span>Até R$ 500 mil por mês em anúncios, quando o Facebook Ads era novidade no Brasil.</span></div></li>
+        <li><span class="y">2014 a 2018</span><div><b>Distintos</b><span>Fundei um marketplace de marcas brasileiras. Sei como é ter a própria loja pra pagar.</span></div></li>
+        <li><span class="y">2018 e 2019</span><div><b>Iguana Sports e Dinda</b><span>De volta à operação grande, em lojas online de esporte e de moda infantil.</span></div></li>
+        <li><span class="y">Desde 2020</span><div><b>InPulso</b><span>Loja, anúncios e base de clientes de marcas brasileiras, todo dia, com agentes de IA no braçal e gente no leme.</span></div></li>
+      </ul>
+      <blockquote>No dia 5 eu abro o que a gente roda toda semana nas lojas que opera.</blockquote>
+    </div>
+  </div>
 </section>
 
 <section class="offer" id="vaga">
