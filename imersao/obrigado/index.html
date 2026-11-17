@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQG4Y6B551"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-NQG4Y6B551');
+      document.addEventListener('click', function (e) {
+        var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"], a[href*="whatsapp.com"]') : null;
+        if (!a) return;
+        if (window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp' });
+        gtag('event', 'generate_lead', { method: 'whatsapp', page_path: location.pathname });
+      });
+    </script>
+    <script>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+      document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '592464496679667');
+      fbq('track', 'PageView');
+    </script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Sua vaga · Imersão Natal e 2027 com IA · InPulso</title>
+<link rel="icon" href="../../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--sage:#A8C2BC;--sage-deep:#8FACA5;--card:#F5F1EB;--paper:#FBF9F4;--navy:#0F2A47;--dim:#5b6b78;--line:#d9d0c0;--gold:#B08D57;--alert:#b3402f}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(180deg,#E8DCC8 0%,var(--sage) 100%);color:var(--navy);min-height:100vh;display:grid;place-items:center;padding:32px 16px;-webkit-font-smoothing:antialiased}
+.card{max-width:560px;width:100%;background:var(--paper);border:1px solid var(--navy);border-radius:6px;padding:40px 34px;box-shadow:12px 12px 0 var(--navy)}
+.eyebrow{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--dim)}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;margin:12px 0 14px}
+h1 em{font-style:italic;color:var(--sage-deep)}
+p{color:var(--dim);margin-top:10px;line-height:1.6}
+.when{margin-top:22px;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:8px;font-size:.98rem}
+.when b{color:var(--navy)}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--navy);border-radius:50%;animation:s 1s linear infinite;vertical-align:-2px;margin-right:8px}
+@keyframes s{to{transform:rotate(360deg)}}
+a.btn{display:inline-flex;margin-top:22px;background:var(--navy);color:var(--card);padding:14px 22px;border-radius:2px;font-weight:600;text-decoration:none}
+.hide{display:none}
+</style>
+</head>
+<body>
+<main class="card">
+  <span class="eyebrow">Imersão Natal e 2027 com IA · InPulso</span>
+  <div id="checando"><h1>Conferindo o seu pagamento...</h1><p><span class="spin"></span>Isso leva alguns segundos.</p></div>
+  <div id="pago" class="hide">
+    <h1>Vaga garantida, <em id="nome">você</em>.</h1>
+    <p>Até a véspera, chegam no seu WhatsApp o link da sala e o convite do grupo. Antes do sábado, crie a sua conta grátis no Claude ou no ChatGPT e tenha em mãos o acesso à sua loja e ao Gerenciador de Anúncios.</p>
+    <div class="when"><span><b>Sábado, 5 de dezembro</b> · 9h às 13h (Brasília)</span><span>Online, ao vivo · a gravação fica 30 dias</span></div>
+  </div>
+  <div id="pendente" class="hide">
+    <h1>Quase lá.</h1>
+    <p>O pagamento ainda não caiu. No Pix, ele confirma em poucos minutos depois de pago; esta página atualiza sozinha. Se fechar, sem problema: a confirmação também chega no seu WhatsApp.</p>
+  </div>
+  <div id="falhou" class="hide">
+    <h1>O pagamento não passou.</h1>
+    <p>Nada foi cobrado. Você pode tentar de novo, com Pix ou outro cartão.</p>
+    <a class="btn" href="../#vaga">Tentar de novo</a>
+  </div>
+</main>
+<script>
+(function(){
+  var API='https://inpulso-imersao.pages.dev';
+  var c=new URLSearchParams(location.search).get('c')||'';
+  function show(id){['checando','pago','pendente','falhou'].forEach(function(x){document.getElementById(x).classList.toggle('hide',x!==id);});}
+  if(!/^im_[a-z0-9]{10}$/.test(c)){show('falhou');return;}
+  var n=0,fired=false;
+  function check(){
+    fetch(API+'/api/status?c='+c).then(function(r){return r.json();}).then(function(r){
+      if(!r.ok){show('falhou');return;}
+      if(r.status==='paid'){
+        document.getElementById('nome').textContent=r.primeiro_nome||'você';show('pago');
+        if(!fired&&!r.teste){fired=true;
+          try{if(window.fbq)fbq('track','Purchase',{value:r.valor,currency:'BRL',content_name:'imersao-natal-2027'},{eventID:c});}catch(x){}
+          try{if(window.gtag)gtag('event','purchase',{transaction_id:c,value:r.valor,currency:'BRL',items:[{item_id:'imersao-natal-2027',item_name:'Imersão Natal e 2027',price:r.valor}]});}catch(x){}
+        }
+        return;
+      }
+      if(r.status==='rejected'||r.status==='cancelled'){show('falhou');return;}
+      show('pendente');if(++n<120)setTimeout(check,5000);
+    }).catch(function(){show('pendente');if(++n<120)setTimeout(check,8000);});
+  }
+  check();
+})();
+</script>
+</body>
+</html>
